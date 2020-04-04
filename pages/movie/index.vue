@@ -1,7 +1,7 @@
 <template>
   <div class="main-cinema">
-    <div ref="videoPlayer" class="row player">
-      <video controls="controls" autoplay="autoplay">
+    <div ref="rowPlayer" class="row player">
+      <video ref="videoPlayer" controls="controls" autoplay="autoplay">
         <source ref="sourceVideo" type="video/mp4" />
         <track
           ref="trackVideo"
@@ -27,18 +27,11 @@
 
 <script>
 import axios from 'axios'
-// import Logo from '~/components/Logo.vue'
 
 export default {
-  /* eslint-disable nuxt/no-timing-in-fetch-data */
   layout: 'movie',
 
   async asyncData() {
-    // return new Promise((resolve) => {
-    //   setTimeout(function() {
-    //     resolve({ name: 'world' })
-    //   }, 1000)
-    // })
     const { data } = await axios.get(`${process.env.baseUrl}/api/getAllMovie`)
     return { movies: data }
   },
@@ -64,14 +57,15 @@ export default {
     },
 
     showPlayer(linkMovie) {
-      this.$refs.videoPlayer.style.maxHeight = '0'
+      this.$refs.rowPlayer.style.maxHeight = '0'
       this.$scrollToSmooth('.row.player', null, -30)
 
       this.$refs.sourceVideo.setAttribute('src', `${linkMovie}.mp4`)
       this.$refs.trackVideo.setAttribute('src', `${linkMovie}.vtt`)
       setTimeout(() => {
-        this.$refs.videoPlayer.style.maxHeight = '700px'
+        this.$refs.rowPlayer.style.maxHeight = '1000px'
         this.$scrollToSmooth('.row.player', null, -30)
+        this.$refs.videoPlayer.load()
       }, 700)
     }
   }

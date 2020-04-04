@@ -4,7 +4,12 @@ module.exports = {
    ** Headers of the page
    */
   env: {
-    baseUrl: process.env.BASE_URL || 'http://127.0.0.1:3000'
+    baseUrl: 'http://vonvon.xyz:3000'
+  },
+
+  server: {
+    port: 3000, // default: 3000
+    host: '192.168.1.251' // default: localhost
   },
 
   head: {
