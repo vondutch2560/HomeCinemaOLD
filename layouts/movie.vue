@@ -2,9 +2,9 @@
   <div class="__layout_movie">
     <header>
       <div class="row">
-        <nuxt-link to="/movie" class="logo"
+        <a href="#" class="logo" @click="clearPlayer"
           ><img src="~/assets/movie/logo.webp" alt="Logo Home Theater"
-        /></nuxt-link>
+        /></a>
       </div>
     </header>
     <nuxt />
@@ -13,6 +13,19 @@
     </footer>
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    clearPlayer() {
+      document.querySelector('.row.player').style.maxHeight = '0'
+
+      document.querySelector('.row.player video source').setAttribute('src', '')
+      document.querySelector('.row.player video track').setAttribute('src', '')
+      this.$scrollToSmooth('.row.player', null, -30)
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 @mixin res1920 {
@@ -120,6 +133,7 @@ footer {
     text-align: center;
     max-height: 0;
     overflow: hidden;
+    transition: max-height 0.6s;
 
     video {
       margin: auto;
@@ -157,7 +171,8 @@ footer {
       height: 0;
       padding-bottom: 160%;
       border: 1px solid #999;
-      @include bgImg('http://image.phimmoi.net/film/6113/poster.medium.jpg');
+      @include bgImg(' ');
+      cursor: pointer;
     }
   }
 }

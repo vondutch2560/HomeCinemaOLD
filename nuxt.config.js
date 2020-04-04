@@ -3,6 +3,10 @@ module.exports = {
   /*
    ** Headers of the page
    */
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://127.0.0.1:3000'
+  },
+
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -27,7 +31,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~plugins/helper.js'],
   /*
    ** Nuxt.js dev-modules
    */
